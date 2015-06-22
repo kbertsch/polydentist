@@ -1,0 +1,95 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<dom-module id="test-form">
+  <style>
+    :host {
+      display: block;
+
+
+paper-dialog.paper-dialog-0 {
+    background: #ffffff none repeat scroll 0 0;
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4);
+    color: #212121;
+    font-family: "Roboto","Noto",sans-serif;
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 20px;
+    overflow: auto;
+
+    }
+  </style>
+  <template>
+    <div>Hello from <span>{{foo}}</span></div>
+    <paper-input-container>
+  <input is="iron-input" pattern="[0-9]*">
+  <paper-input-error>Only numbers are allowed!</paper-input-error>
+</paper-input-container>
+<section onclick="clickHandler(event)">
+    <h4>Transitions</h4>
+    <paper-button data-dialog="animated" role="button" tabindex="0" aria-disabled="false" class="x-scope paper-button-0">
+
+    <paper-ripple class="style-scope paper-button">
+    <div id="background" class="style-scope paper-ripple" style="opacity: 0;"></div>
+    <div id="waves" class="style-scope paper-ripple"></div>
+  </paper-ripple>
+
+    <paper-material animated="" class="content  style-scope paper-button x-scope paper-material-0" elevation="0">
+    
+      transitions
+    
+  </paper-material>
+
+  </paper-button>
+    <paper-dialog exit-animation="fade-out-animation" entry-animation="scale-up-animation" with-backdrop="" id="animated" role="dialog" tabindex="-1" aria-modal="false" style="outline: medium none; box-sizing: border-box; position: static; display: none;" class="x-scope paper-dialog-0" aria-labelledby="paper-dialog-header-122" aria-hidden="true">
+    
+      <h2 id="paper-dialog-header-122">Dialog Title</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    
+  </paper-dialog>
+  </section>
+  </template>
+</dom-module>
+<script>
+(function() {
+  Polymer({
+    is: 'test-form',
+
+    properties: {
+      foo: {
+        type: String,
+        value: 'bar',
+        notify: true
+      }
+    }
+  });
+})();
+
+ function clickHandler(e) {
+      var button = e.target;
+      while (!button.hasAttribute('data-dialog') && button !== document.body) {
+        button = button.parentElement;
+      }
+      
+      if (!button.hasAttribute('data-dialog')) {
+        return;
+      }
+
+      var id = button.getAttribute('data-dialog');
+      var dialog = document.getElementById(id);
+      if (dialog) {
+        dialog.open();
+      }
+    }
+
+</script>
